@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFE - ORDENS DE MISSÃO</title>
+    <style>
+        /* DESIGN PADRÃO COMBAT-HUD BFE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+
+        :root {
+            --neon-green: #00ff66;
+            --dark-green: #0b1d12;
+            --deep-black: #050a07;
+            --text-gray: #8da697;
+            --alert-orange: #ff9900;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* EFEITO DE RADAR TÁTICO */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 40px;
+            background: rgba(5, 10, 7, 0.9);
+            border-bottom: 2px solid var(--neon-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .btn-back {
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        /* CARD DE MISSÃO ESTILO BRIEFING OPERACIONAL */
+        .briefing-box {
+            background: var(--dark-green);
+            border: 2px solid var(--neon-green);
+            padding: 35px;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .briefing-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed var(--neon-green);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .op-name {
+            font-size: 1.6rem;
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .op-status {
+            background: rgba(255, 153, 0, 0.1);
+            border: 1px solid var(--alert-orange);
+            color: var(--alert-orange);
+            padding: 5px 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            color: var(--neon-green);
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 20px 0 10px 0;
+            border-left: 3px solid var(--neon-green);
+            padding-left: 10px;
+        }
+
+        .briefing-text {
+            color: #e2e8f0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        /* LISTA DE OBJETIVOS TÁTICOS */
+        .objectives-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .objectives-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .objectives-list li::before {
+            content: "[ ]";
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        /* INFORMAÇÕES DE INTELIGÊNCIA DE COMBATE */
+        .intel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            background: var(--deep-black);
+            padding: 15px;
+            border: 1px solid rgba(0, 255, 102, 0.2);
+        }
+
+        .intel-item {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .intel-label {
+            color: var(--neon-green);
+            font-weight: bold;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        /* RODAPÉ TERMINAL */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #020503;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 255, 102, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR DA PÁGINA -->
+    <header>
+        <a href="BfeHome.HTML" class="logo">DIVISÃO BFE</a>
+        <a href="BfeHome.HTML" class="btn-back">&lt; VOLTAR AO QG</a>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+        <h1>Ordens de Missão</h1>
+        <div class="subtitle">[ CENTRO DE DIRECIONAMENTO TÁTICO E OPERAÇÕES ]</div>
+
+        <!-- QUADRO DA MISSÃO ATUAL -->
+        <div class="briefing-box">
+            
+            <div class="briefing-header">
+                <div class="op-name">Operação Blackout</div>
+                <div class="op-status">[ EM PREPARAÇÃO ]</div>
+            </div>
+
+            <div class="section-title">Contexto de Combate (Situação)</div>
+            <p class="briefing-text">
+                Informações obtidas pelo nosso setor de Reconhecimento confirmam que forças insurgentes assumiram o controle da zona de comunicações na rota norte. Eles estão bloqueando os canais de transmissão de rádio aliados e fortificando posições estratégicas ao redor das antenas principais utilizando armamento pesado de supressão.
+            </p>
+
+            <div class="section-title">Objetivos Críticos</div>
+            <ul class="objectives-list">
+                <li>01. Realizar a infiltração furtiva pela floresta com a equipe de Sniper.</li>
+                <li>02. Neutralizar as defesas perimetrais sem disparar os alarmes da central.</li>
+                <li>03. Estabelecer perímetro seguro para a equipe de Suporte desarmar os bloqueadores.</li>
+                <li>04. Garantir a extração total de todos os esquadrões da Divisão BFE vivos.</li>
+            </ul>
+
+            <div class="section-title">Dados de Inteligência Operacional</div>
+            <div class="intel-grid">
+                <div class="intel-item">
+                    <span class="intel-label">🗺️ MAPA / REGIÃO:</span>
+                    Vales do Norte (Ambiente Florestal)
+                </div>
+                <div class="intel-item">
+                    <span class="intel-label">⏰ DATA / HORÁRIO:</span>
+                    Sábado às 20:00h (Horário de Brasília)
+                </div>
+                <div class="intel-item">
+                    <span class="intel-label">🪖 EQUIPAMENTOS:</span>
+                    Fuzil IA2 5.56, Metralhadora M249 e M24 Sniper
+                </div>
+                <div class="intel-item">
+                    <span class="intel-label">🎙️ CANAL DE rÁDIO:</span>
+                    Comms Operações 01 (Discord)
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- RODAPÉ TERMINAL -->
+    <footer>
+        [SISTEMA BFE ONLINE] &copy; 2026 Força Expedicionária Militar. Painel tático fictício para fins de simulação de clãs.
+    </footer>
+
+</body>
+</html>
