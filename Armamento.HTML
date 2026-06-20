@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFE - ARSENAL DA DIVISÃO</title>
+    <style>
+        /* DESIGN COERENTE COM O SITE PRINCIPAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+
+        :root {
+            --neon-green: #00ff66;
+            --dark-green: #0b1d12;
+            --deep-black: #050a07;
+            --text-gray: #8da697;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* EFEITO DE TELA DE TERMINAL MILITAR */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 40px;
+            background: rgba(5, 10, 7, 0.9);
+            border-bottom: 2px solid var(--neon-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .btn-back {
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        /* GRID DE ARMAS */
+        .weapons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .weapon-card {
+            background: var(--dark-green);
+            border: 1px solid var(--neon-green);
+            border-radius: 4px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+
+        .weapon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.2);
+        }
+
+        /* ESTILO PARA AS IMAGENS REAIS DAS ARMAS */
+        .weapon-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover; /* Ajusta a imagem perfeitamente sem distorcer */
+            border: 1px solid rgba(0, 255, 102, 0.3);
+            border-radius: 2px;
+            margin-bottom: 15px;
+        }
+
+        .weapon-name {
+            color: var(--neon-green);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 255, 102, 0.2);
+            padding-bottom: 5px;
+        }
+
+        .weapon-info {
+            font-size: 0.9rem;
+            color: #fff;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        /* STATUS DA ARMA */
+        .specs {
+            background: var(--deep-black);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            color: var(--text-gray);
+        }
+
+        .spec-value {
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+        
+        /* RODAPÉ TERMINAL */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #020503;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 255, 102, 0.1);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR DA PÁGINA -->
+    <header>
+    <a href="BfeHome.HTML" class="logo">DIVISÃO BFE</a>
+    <div style="display: flex; gap: 15px;">
+        <a href="Regras.HTML" style="color: #fff; text-decoration: none; border: 1px solid var(--neon-green); padding: 8px 15px; font-size: 0.9rem;">REGRAS</a>
+        <a href="BfeHome.HTML" class="btn-back">&lt; VOLTAR AO QG</a>
+    </div>
+</header>
+
+    <!-- CONTEÚDO DO ARSENAL -->
+    <main class="container">
+        <h1>Arsenal de Operações</h1>
+        <div class="subtitle">[ EQUIPAMENTO AUTORIZADO PARA INFANTARIA E ELITE ]</div>
+
+        <div class="weapons-grid">
+            
+            <!-- CARD 1: FUZIL IA2 5.56 -->
+            <div class="weapon-card">
+                <div>
+                    <img src="Fuzil IA2 5.56.png" alt="Fuzil IA2 5.56" class="weapon-img">
+                    <div class="weapon-name">Fuzil IA2 5.56</div>
+                    <p class="weapon-info">Armamento padrão da infantaria de assalto. Produto 100% nacional desenvolvido pela IMBEL, oferecendo modularidade, precisão e alta durabilidade.</p>
+                </div>
+                <div class="specs">
+                    <div class="spec-row"><span>TIPO:</span><span class="spec-value">Fuzil de Assalto</span></div>
+                    <div class="spec-row"><span>CALIBRE:</span><span class="spec-value">5.56x45mm NATO</span></div>
+                    <div class="spec-row"><span>CAPACIDADE:</span><span class="spec-value">30 Projéteis</span></div>
+                </div>
+            </div>
+
+            <!-- CARD 2: M24 SNIPER -->
+            <div class="weapon-card">
+                <div>
+                    <img src="M24 Sniper.png" alt="M24 Sniper" class="weapon-img">
+                    <div class="weapon-name">M24 Sniper</div>
+                    <p class="weapon-info">Destinado para a divisão de Reconhecimento. Capaz de neutralizar alvos a distâncias extremas com disparo único e alta precisão óptica.</p>
+                </div>
+                <div class="specs">
+                    <div class="spec-row"><span>TIPO:</span><span class="spec-value">Fuzil de Precisão</span></div>
+                    <div class="spec-row"><span>CALIBRE:</span><span class="spec-value">7.62x51mm NATO</span></div>
+                    <div class="spec-row"><span>CAPACIDADE:</span><span class="spec-value">5 Projéteis</span></div>
+                </div>
+            </div>
+
+            <!-- CARD 3: METRALHADORA M249 (AGORA COM A SUA FOTO) -->
+            <div class="weapon-card">
+                <div>
+                    <!-- Adicionada a sua foto configurada exatamente com o nome enviado -->
+                    <img src="M249.png" alt="Metralhadora M249" class="weapon-img">
+                    <div class="weapon-name">Metralhadora M249</div>
+                    <p class="weapon-info">Armamento pesado para a classe de Suporte. Utilizada para supressão de fogo inimigo e controle de área de grande escala.</p>
+                </div>
+                <div class="specs">
+                    <div class="spec-row"><span>TIPO:</span><span class="spec-value">Suporte Pesado</span></div>
+                    <div class="spec-row"><span>CALIBRE:</span><span class="spec-value">5.56x45mm Belt</span></div>
+                    <div class="spec-row"><span>CAPACIDADE:</span><span class="spec-value">200 Projéteis</span></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- RODAPÉ TERMINAL -->
+    <footer>
+        [SISTEMA BFE ONLINE] &copy; 2026 Força Expedicionária Militar.
+    </footer>
+
+</body>
+</html>

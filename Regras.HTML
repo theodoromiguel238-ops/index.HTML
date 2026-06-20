@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFE - DIRETRIZES E REGRAS</title>
+    <style>
+        /* DESIGN COERENTE COM O PADRÃO BFE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+
+        :root {
+            --neon-green: #00ff66;
+            --dark-green: #0b1d12;
+            --deep-black: #050a07;
+            --text-gray: #8da697;
+            --alert-red: #ff3333;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* EFEITO DE TELA DE TERMINAL MILITAR */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 40px;
+            background: rgba(5, 10, 7, 0.9);
+            border-bottom: 2px solid var(--neon-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .btn-back {
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        /* ESTRUTURA DOS ARTIGOS DE REGRAS */
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .rule-card {
+            background: var(--dark-green);
+            border: 1px solid var(--neon-green);
+            padding: 25px;
+            border-radius: 4px;
+        }
+
+        .rule-title {
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .rule-text {
+            color: #ffffff;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .punishment {
+            margin-top: 15px;
+            background: rgba(255, 51, 51, 0.1);
+            border-left: 3px solid var(--alert-red);
+            padding: 10px;
+            font-size: 0.85rem;
+            color: #ffcccc;
+        }
+
+        .punishment-title {
+            color: var(--alert-red);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        /* RODAPÉ TERMINAL */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #020503;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 255, 102, 0.1);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR DA PÁGINA -->
+    <header>
+        <a href="BfeHome.HTML" class="logo">EXÉRCITO BFE</a>
+        <a href="BfeHome.HTML" class="btn-back">&lt; VOLTAR AO QG</a>
+    </header>
+
+    <!-- CONTEÚDO DO REGULAMENTO -->
+    <main class="container">
+        <h1>Código de Conduta</h1>
+        <div class="subtitle">[ CÓDIGO MILITAR DE DISCIPLINA DA DIVISÃO BFE ]</div>
+
+        <div class="rules-list">
+            
+            <!-- REGRA 1 -->
+            <div class="rule-card">
+                <div class="rule-title">
+                    <span>Artigo 01 - Hierarquia e Respeito</span>
+                    <span style="color: var(--text-gray);">[GRAVÍSSIMO]</span>
+                </div>
+                <p class="rule-text">É obrigatório respeitar todos os membros da divisão, independentemente de patente. Ordens de oficiais superiores em simulações ou eventos devem ser cumpridas sem contestações em canais públicos.</p>
+                <div class="punishment">
+                    <div class="punishment-title">Sanção Aplicável:</div>
+                    Rebaixamento imediato de patente ou expulsão direta em caso de insubordinação direta.
+                </div>
+            </div>
+
+            <!-- REGRA 2 -->
+            <div class="rule-card">
+                <div class="rule-title">
+                    <span>Artigo 02 - Comunicação de Rádio (Comms)</span>
+                    <span style="color: var(--text-gray);">[GRAVE]</span>
+                </div>
+                <p class="rule-text">Durante operações táticas oficiais, os canais de voz do rádio/Discord devem ser mantidos limpos. Proibido ruidos desnecessários, gritaria, músicas ou interrupções enquanto os líderes estiverem transmitindo estratégias.</p>
+                <div class="punishment">
+                    <div class="punishment-title">Sanção Aplicável:</div>
+                    Mutado da operação atual e advertência formal na ficha militar.
+                </div>
+            </div>
+
+            <!-- REGRA 3 -->
+            <div class="rule-card">
+                <div class="rule-title">
+                    <span>Artigo 03 - Uso Próprio do Armamento</span>
+                    <span style="color: var(--text-gray);">[MODERADO]</span>
+                </div>
+                <p class="rule-text">Utilize apenas o armamento previamente designado para a sua respectiva classe (Assalto, Suporte, Reconhecimento) na simulação. O fogo amigo (Team Kill) intencional é completamente banido da comunidade.</p>
+                <div class="punishment">
+                    <div class="punishment-title">Sanção Aplicável:</div>
+                    Suspensão das próximas 2 operações da semana.
+                </div>
+            </div>
+
+            <!-- REGRA 4 -->
+            <div class="rule-card">
+                <div class="rule-title">
+                    <span>Artigo 04 - Compromisso e Presença</span>
+                    <span style="color: var(--text-gray);">[LEVE]</span>
+                </div>
+                <p class="rule-text">Caso confirme presença em alguma operação semanal da BFE e não possa comparecer, avise o seu comando com antecedência mínima de 2 horas para realocação de esquadrão.</p>
+                <div class="punishment">
+                    <div class="punishment-title">Sanção Aplicável:</div>
+                    Perda de prioridade na escolha de classes especiais na próxima missão.
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- RODAPÉ TERMINAL -->
+    <footer>
+        [SISTEMA BFE ONLINE] &copy; 2026 Força Expedicionária Militar.
+    </footer>
+
+</body>
+</html>

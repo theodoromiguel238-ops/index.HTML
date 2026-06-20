@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFE - FORMULÁRIO DE ALISTAMENTO</title>
+    <style>
+        /* DESIGN COERENTE COM A PÁGINA PRINCIPAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+
+        :root {
+            --neon-green: #00ff66;
+            --dark-green: #0b1d12;
+            --deep-black: #050a07;
+            --text-gray: #8da697;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* EFEITO DE TELA DE TERMINAL MILITAR */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        /* HEADER SIMPLES DE RETORNO COM LINKS ATUALIZADOS */
+        header {
+            padding: 20px 40px;
+            background: rgba(5, 10, 7, 0.9);
+            border-bottom: 2px solid var(--neon-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .btn-back {
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* ÁREA CENTRAL DO FORMULÁRIO */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            flex-grow: 1;
+        }
+
+        .form-frame {
+            background: var(--dark-green);
+            border: 2px dashed var(--neon-green);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 0 35px rgba(0, 255, 102, 0.1);
+        }
+
+        .form-frame h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--neon-green);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: var(--deep-black);
+            border: 1px solid var(--text-gray);
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--neon-green);
+            color: #000;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 25px #fff;
+        }
+
+        /* RODAPÉ TERMINAL */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #020503;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(0, 255, 102, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA SUPERIOR DA PÁGINA DE CADASTRO WITH DIRECIONAMENTO PARA BfeHome.HTML -->
+    <header>
+    <a href="BfeHome.HTML" class="logo">DIVISÃO BFE</a>
+    <div style="display: flex; gap: 15px;">
+        <a href="Regras.HTML" style="color: #fff; text-decoration: none; border: 1px solid var(--neon-green); padding: 8px 15px; font-size: 0.9rem;">REGRAS</a>
+        <a href="BfeHome.HTML" class="btn-back">&lt; VOLTAR AO QG</a>
+    </div>
+</header>
+
+    <!-- CONTAINER DO FORMULÁRIO -->
+    <main class="main-container">
+        <div class="form-frame">
+            <h1>Ficha de Alistamento</h1>
+            <div class="form-subtitle">Preencha com dados válidos. Sua aprovação depende disso.</div>
+            
+            <!-- FORMULÁRIO CONFIGURADO PARA O DISCORD -->
+            <form id="formAlistamento" onsubmit="enviarParaDiscord(event)">
+                
+                <div class="form-group">
+                    <label>Designação Oficial (Nome / Nickname)</label>
+                    <input type="text" id="nome" placeholder="Digite seu codinome de combate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>ID de Comunicação (Discord)</label>
+                    <input type="text" id="discord_id" placeholder="Ex: soldado_bfe" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Idade Atual</label>
+                    <input type="number" id="idade" min="12" max="100" placeholder="Sua idade real" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Especialidade de Interesse</label>
+                    <select id="especialidade" required>
+                        <option value="" disabled selected>Escolha sua função militar</option>
+                        <option value="Infantaria de Assalto">Infantaria de Assalto (Front de Combate)</option>
+                        <option value="Suporte / Logística">Suporte / Logística (Abastecimento)</option>
+                        <option value="Reconhecimento / Sniper">Reconhecimento / Sniper (Infiltração)</option>
+                        <option value="Estrategista / Comando">Estrategista / Comando (Liderança)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Histórico Clínico / Experiência em Jogos (Opcional)</label>
+                    <textarea id="experiencia" placeholder="Conte brevemente sua experiência com jogos de simulação ou clãs anteriores..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Transmitir Dados à Central</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- RODAPÉ TERMINAL -->
+    <footer>
+        [SISTEMA BFE ONLINE] &copy; 2026 Força Expedicionária Militar.
+    </footer>
+
+    <!-- SCRIPT DE ENVIO DIRETO PARA O DISCORD -->
+    <script>
+    function enviarParaDiscord(event) {
+        event.preventDefault();
+
+        // Cole o link gerado no seu Discord entre as aspas abaixo:
+        const webhookURL = "COLE_AQUI_O_SEU_LINK_DO_WEBHOOK";
+
+        const nome = document.getElementById('nome').value;
+        const discordId = document.getElementById('discord_id').value;
+        const idade = document.getElementById('idade').value;
+        const especialidade = document.getElementById('especialidade').value;
+        const experiencia = document.getElementById('experiencia').value || "Nenhuma informada.";
+
+        const dadosFormulario = {
+            embeds: [{
+                title: "⚔️ NOVO ALISTAMENTO RECEBIDO - EXÉRCITO BFE ⚔️",
+                color: 65382,
+                fields: [
+                    { name: "👤 Codinome:", value: nome, inline: true },
+                    { name: "🆔 Discord:", value: discordId, inline: true },
+                    { name: "🎂 Idade:", value: idade + " anos", inline: true },
+                    { name: "🪖 Especialidade:", value: especialidade, inline: false },
+                    { name: "📝 Experiência anterior:", value: experiencia, inline: false }
+                ],
+                timestamp: new Date()
+            }]
+        };
+
+        fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dadosFormulario)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Dados transmitidos com sucesso! Verifique a central de comando no Discord.');
+                window.location.href = 'BfeHome.HTML';
+            } else {
+                alert('Erro ao enviar dados. Verifique a configuração do seu Webhook.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro de conexão ao enviar a ficha.');
+        });
+    }
+    </script>
+
+</body>
+</html>
+
+
